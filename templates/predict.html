@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: blur(10px);
+        }
+
+        .result_heading {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 32px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .result_row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            font-size: 28px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .suffer, .not_suffer {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .suffer {
+            background-color: #FF7979;
+            color: #fff;
+            animation-name: shake;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        .not_suffer {
+            background-color: #54a0ff;
+            color: #fff;
+            animation-name: zoomIn;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes zoomIn {
+            0% { opacity: 0; transform: scale(0.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" autoplay muted loop>
+        <source src="{{url_for('static',filename='img/bg.mp4')}}" type="video/mp4">
+    </video>
+    <h3 class="result_heading">Health Diagnosis Predictor</h3>
+    <div class="result_row">
+        {% if prediction==1 %}
+        <div class="suffer">Oops! It looks like you may be suffering from a health condition. 😔 Please consult with your doctor.</div>
+        {% elif prediction==0 %}
+        <div class="not_suffer">Congratulations! You're healthy as a horse! 🥳 Keep up the good work
+        {% endif %}
+    </div>
+</body>
+</html>

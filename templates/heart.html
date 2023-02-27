@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HDP</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500&display=swap');
+       body{
+        background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='100%25' width='100%25'%3E%3Cdefs%3E%3Cpattern id='doodad' width='40' height='40' viewBox='0 0 40 40' patternUnits='userSpaceOnUse' patternTransform='rotate(135)'%3E%3Crect width='100%25' height='100%25' fill='rgba(247, 250, 252,1)'/%3E%3Ccircle cx='20' cy='30' r='1' stroke-width='0' fill='rgba(34, 84, 61,1)'/%3E%3Ccircle cx='20' cy='10' r='1' stroke-width='0' fill='rgba(34, 84, 61,1)'/%3E%3Ccircle cx='30' cy='20' r='1' stroke-width='0' fill='rgba(42, 67, 101,1)'/%3E%3Ccircle cx='10' cy='20' r='1' stroke-width='0' fill='rgba(42, 67, 101,1)'/%3E%3Ccircle cx='30' cy='20' r='1' stroke-width='0' fill='rgba(42, 67, 101,1)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect fill='url(%23doodad)' height='200%25' width='200%25'/%3E%3C/svg%3E ")
+       }
+        form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 5px 10px grey;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            padding-top: 20px;
+            font-family: 'Syne', sans-serif;
+            font-size: 40px;
+            background-color: bisque;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Heart Disease Predictor</h2>
+        <form action="{{ url_for('predict') }}" method="POST" id="heart-disease-predictor-form">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="age">Age:</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="sex">Sex:</label>
+                    <select class="form-control" id="sex" name="sex" required>
+                        <option value="0">Female</option>
+                        <option value="1">Male</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="cp">Chest Pain Type:</label>
+                <select class="form-control" id="cp" name="cp" required>
+                    <option value="0">Typical Angina</option>
+                    <option value="1">Atypical Angina</option>
+                    <option value="2">Non-anginal Pain</option>
+                    <option value="3">Asymptomatic</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
+                    <input type="number" class="form-control" id="trestbps" name="trestbps" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="chol">Serum Cholesterol (mg/dL):</label>
+                    <input type="number" class="form-control" id="chol" name="chol">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fbs">Fasting Blood Sugar &gt; 120 mg/dL:</label>
+                    <select class="form-control" id="fbs" name="fbs" required>
+                        <option value="0">No
+
+                        </option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="restecg">Resting Electrocardiographic Results:</label>
+                    <select class="form-control" id="restecg" name="restecg" required>
+                        <option value="0">Normal</option>
+                        <option value="1">ST-T Wave Abnormality</option>
+                        <option value="2">Left Ventricular Hypertrophy</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="thalach">Maximum Heart Rate Achieved:</label>
+                    <input type="number" class="form-control" id="thalach" name="thalach" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exang">Exercise Induced Angina:</label>
+                    <select class="form-control" id="exang" name="exang" required>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest:</label>
+                    <input type="number" class="form-control" id="oldpeak" name="oldpeak" step="0.1" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="slope">The Slope of the Peak Exercise ST Segment:</label>
+                    <select class="form-control" id="slope" name="slope" required>
+                        <option value="0">Upsloping</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Downsloping</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+
+
+                <div class="form-group col-md-6">
+                    <label for="ca">Number of Major Vessels:</label>
+                    <select class="form-control" id="ca" name="ca" required>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="thal">Thal:</label>
+                    <select class="form-control" id="thal" name="thal" required>
+                        <option value="0">Normal</option>
+                        <option value="1">Fixed Defect</option>
+                        <option value="2">Reversible Defect</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Predict" class="btn btn-primary">
+        </form>
+    </div>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

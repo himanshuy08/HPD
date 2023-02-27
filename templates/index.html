@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDP</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+    <header>
+        <h1>Heart Disease Predictor</h1>
+    </header>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <!-- <source src="img/heart.mp4" type="video/mp4"> -->
+            <source src="{{ url_for('static', filename='img/heart.mp4') }}" type="video/mp4">
+        </video>
+        <div class="overlay">
+            <div class="left-side">
+                <h2>Welcome to our Heart Disease Predictor!</h2>
+                <p>Our Heart Disease Predictor uses cutting-edge AI to analyze your risk factors and provide you with a
+                    personalized assessment. With just a few quick questions, you'll get valuable insights into your
+                    heart health and the steps you can take to keep your ticker ticking.</p>
+                <p>Take control of your heart health and get started today!</p>
+               <button class="btn"> <a href="{{ url_for('heart') }}">Quick Analysis </a></button>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
